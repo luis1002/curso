@@ -39,30 +39,29 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="jqm/jquery.mobile-1.4.5.min.css" />
-    <script type="text/javascript" src="jqm/jquery.min.js"></script>
-    <script type="text/javascript" src="jqm/jquery.mobile-1.4.5.min.js"></script>
     <title>Hello World</title>
 </head>
+<style>
+        canvas{
+            width: 100%;
+            background-color:#EEEEEE;
+            display:none;
+        }
+</style>
 
 <body>
-    <div id="pag1" data-role="page" data-theme="a">
-        <div data-role="header">
-            <h1>Hola desde JQ Mobile</h1>
-        </div>
-        <div data-role="content">
-            <h2 id="salida"></h2>
-        </div>
-        <div data-role="footer">
-            <h2>Phonegap</h2>
-        </div>
-    </div>
+    <canvas id="lienzo"></canvas>
+    <button id="reset">Limpiar <Canvas></button>
+    <button id="capturar">capturar</button>
+
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-    document.addEventListener('deviceready',function(){
-        document.getElementById('salida').innerHTML="Phonegap inicializado desde JQM";
-    },false);
+        app.initialize();
     </script>
 </body>
+
+
+
 
 </html>
