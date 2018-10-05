@@ -37,13 +37,50 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        var ctx, bandera;
+        reset = document.getElementbyld("reset");
+        canvas = document.getElementbyld("lienzo");
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        canvas.style.display = "block";
+       ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = 350;
 
-        console.log('Received Event: ' + id);
+        canvas.addEventListener("touchstart",function(e){
+        var touchobj = e.changedTouches[0];
+        dibuja(touchobj.clientX,touchobj.clientY);
+        bandera = true;
+        e.preventDefault();
+        },false);
+
+        canvas.addEventListener("touchmove",function(e){
+            if(bandera){
+                var touchobj = e.changedTouches[0];
+                dibuja(touchobj.clientX,touchobj.clientY);
+                e.preventDefault();
+            }
+        },false);
+
+        canvas.addEventListener("touchend",function(e){
+            bandera = false;
+            e.preventDefault();
+        },false);
+
+        function dibuja(x, y){
+            if(bandera){
+                ctx.beginPath(); ctx.strokeStyle="black";
+                ctx.linewidth = 4; ctx.lineJoin="round";
+                ctx.moveTo(lastX, lastY); ctx.lineTo(x, y);
+                ctx.closePath(); ctx.stroke();
+            }
+            lastX = x; lastY = y;
+        }
+        reset.addEventListener("click",function(){
+            ctx.fillStyle="EEEEEE"
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+        }, false);
     }
+    
+
+    
 };
